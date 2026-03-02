@@ -1,0 +1,23 @@
+# Systemd service for Prime Registry
+# Install: sudo cp deploy/prime-registry.service /etc/systemd/system/
+#          sudo systemctl enable prime-registry
+#          sudo systemctl start prime-registry
+
+[Unit]
+Description=Prime Registry API
+After=network.target
+
+[Service]
+Type=simple
+User=charles
+WorkingDirectory=/home/charles/prime-registry
+Environment="PRIME_REGISTRY_SECRET=CHANGE_ME"
+Environment="CONTRA_WEBHOOK_SECRET=CHANGE_ME"
+Environment="SMTP_USER=CHANGE_ME"
+Environment="SMTP_PASS=CHANGE_ME"
+ExecStart=/usr/bin/python3 -m uvicorn src.api:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

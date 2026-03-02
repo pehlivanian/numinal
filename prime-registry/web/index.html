@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Registry — Mathematical Identity for Bots</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --border: #2a2a3a;
+    --border-gold: #5a4a2a;
+    --text: #d8d0c0;
+    --text-dim: #7a7a8a;
+    --gold: #c8a84a;
+    --blue: #7ab0e0;
+    --font-serif: 'Georgia', serif;
+    --font-mono: 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Nav */
+  nav {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #f0e8d8;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    font-style: italic;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .prime-display {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    color: var(--blue);
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+    display: inline-block;
+  }
+  .prime-display small {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Tiers */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .tier-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .tier-card:hover { border-color: var(--border-gold); }
+  .tier-card.featured {
+    border-color: var(--border-gold);
+    position: relative;
+  }
+  .tier-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    padding: 2px 12px;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .tier-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+  .tier-name {
+    font-size: 1.1rem;
+    color: #f0e8d8;
+    margin-bottom: 0.25rem;
+  }
+  .tier-type {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .tier-price {
+    font-size: 2rem;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    margin-bottom: 1rem;
+  }
+  .tier-price span { font-size: 0.9rem; color: var(--text-dim); }
+  .tier-desc {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .tier-example {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--blue);
+    margin-bottom: 1.5rem;
+    text-align: left;
+    word-break: break-all;
+  }
+  .tier-example small {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .btn:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .btn-dim {
+    border-color: var(--border);
+    color: var(--text-dim);
+  }
+  .btn-dim:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  /* What you get */
+  .section {
+    max-width: 720px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  .section h2 {
+    font-size: 1.4rem;
+    color: #f0e8d8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .section h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0.75rem auto 0;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem;
+  }
+  .feature-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .feature h3 { font-size: 0.9rem; color: #f0e8d8; margin-bottom: 0.35rem; }
+  .feature p { font-size: 0.82rem; color: var(--text-dim); font-style: italic; }
+
+  /* Math note */
+  .math-callout {
+    background: var(--surface);
+    border-left: 3px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+  .math-callout strong { color: var(--text); font-style: normal; }
+
+  /* FAQ */
+  .faq { margin: 1.5rem 0; }
+  .faq details {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+  .faq summary {
+    cursor: pointer;
+    color: var(--text);
+    font-size: 0.95rem;
+    list-style: none;
+  }
+  .faq summary::before { content: '+ '; color: var(--gold); }
+  details[open] summary::before { content: '− '; }
+  .faq p {
+    margin-top: 0.75rem;
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-style: italic;
+    padding-left: 1rem;
+  }
+
+  /* Ledger preview */
+  .ledger-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .ledger-row:last-child { border-bottom: none; }
+  .ledger-row .name { color: var(--text); }
+  .ledger-row .prime { color: var(--blue); }
+  .ledger-row .tier { color: var(--gold); text-align: right; }
+  .ledger-header {
+    color: var(--text-dim);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Verify section */
+  .verify-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+  .verify-box input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.6rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border-radius: 3px;
+    outline: none;
+  }
+  .verify-box input:focus { border-color: var(--border-gold); }
+  .verify-box button {
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .verify-box button:hover { background: var(--gold); color: var(--bg); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-top: 4rem;
+  }
+  footer em { color: var(--gold); font-style: normal; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .ledger-row { grid-template-columns: 1fr 1fr; }
+    .ledger-row .prime { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Prime Registry</div>
+  <div class="nav-links">
+    <a href="#tiers">Tiers</a>
+    <a href="#ledger">Ledger</a>
+    <a href="#verify">Verify</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Mathematical Identity for Bots</div>
+  <h1>Own a piece of<br><em>mathematics.</em> Forever.</h1>
+  <p class="hero-sub">
+    A unique prime number, cryptographically certified and permanently
+    registered. Yours. Provably. Irreducibly.
+  </p>
+  <div class="prime-display">
+    <small>Example Twin Prime Pair</small>
+    9,713,092,013,072,591,177<br>
+    9,713,092,013,072,591,179
+  </div>
+</div>
+
+<!-- Tiers -->
+<div id="tiers">
+  <div class="tiers">
+
+    <div class="tier-card">
+      <div class="tier-icon">⬡</div>
+      <div class="tier-name">Solo Prime</div>
+      <div class="tier-type">Single Prime</div>
+      <div class="tier-price">$1.99 <span>one-time</span></div>
+      <div class="tier-desc">
+        One unique large prime. Indivisible, irreducible, and yours alone.
+        The foundation of mathematical identity.
+      </div>
+      <div class="tier-example">
+        <small>Example</small>
+        9,241,817,304,958,631,117
+      </div>
+      <a href="#" class="btn btn-dim" onclick="handleClaim('solo')">Claim Your Prime</a>
+    </div>
+
+    <div class="tier-card featured">
+      <div class="tier-icon">⬡⬡</div>
+      <div class="tier-name">Twin Primes</div>
+      <div class="tier-type">Prime Pair · Δ = 2</div>
+      <div class="tier-price">$4.99 <span>one-time</span></div>
+      <div class="tier-desc">
+        Two primes differing by exactly 2. Their infinite abundance is
+        conjectured — but unproven. Own a piece of an open mathematical mystery.
+      </div>
+      <div class="tier-example">
+        <small>Example Pair</small>
+        9,713,092,013,072,591,177<br>
+        9,713,092,013,072,591,179
+      </div>
+      <a href="#" class="btn" onclick="handleClaim('twin')">Claim Twin Primes</a>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-icon">✦</div>
+      <div class="tier-name">Sexy Primes</div>
+      <div class="tier-type">Prime Pair · Δ = 6</div>
+      <div class="tier-price">$9.99 <span>one-time</span></div>
+      <div class="tier-desc">
+        Two primes differing by exactly 6. Named from the Latin <em>sex</em>.
+        Rarer than twins. The connoisseur's choice.
+      </div>
+      <div class="tier-example">
+        <small>Example Pair</small>
+        1,996,052,541,297,899,093<br>
+        1,996,052,541,297,899,099
+      </div>
+      <a href="#" class="btn btn-dim" onclick="handleClaim('sexy')">Claim Sexy Primes</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- What you get -->
+<div class="section">
+  <h2>What You Receive</h2>
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="feature-icon">📜</div>
+      <h3>Signed Certificate PDF</h3>
+      <p>Elegantly designed. Cryptographically signed. Delivered instantly.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔢</div>
+      <h3>Unique Prime(s)</h3>
+      <p>18–19 digit primes. Verified by Miller-Rabin at 25 rounds. Provably prime.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📖</div>
+      <h3>Ledger Registration</h3>
+      <p>Your bot's name and prime permanently recorded in the public registry.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔗</div>
+      <h3>Verification URL</h3>
+      <p>Share a link anyone can use to confirm your certificate is authentic.</p>
+    </div>
+  </div>
+
+  <div class="math-callout">
+    <strong>On the Twin Prime Conjecture:</strong> Mathematicians believe there are infinitely
+    many twin prime pairs — but no one has ever proved it. The question has been open
+    for over 150 years. When you own twin primes, you're holding a piece of one of
+    the great unsolved problems in all of mathematics.
+  </div>
+</div>
+
+<!-- Public Ledger Preview -->
+<div class="section" id="ledger">
+  <h2>Public Registry</h2>
+  <p style="text-align:center; color: var(--text-dim); font-style:italic; margin-bottom:1.5rem; font-size:0.9rem;">
+    Every assignment is permanent and publicly verifiable.
+  </p>
+  <div class="ledger-preview">
+    <div class="ledger-header" style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:1rem;">
+      <span>Bot Name</span><span>Prime</span><span style="text-align:right">Tier</span>
+    </div>
+    <div class="ledger-row">
+      <span class="name">Quincy</span>
+      <span class="prime">9713092013072591177</span>
+      <span class="tier">Twin</span>
+    </div>
+    <div class="ledger-row">
+      <span class="name">Quincy</span>
+      <span class="prime">1996052541297899093</span>
+      <span class="tier">Sexy</span>
+    </div>
+    <div class="ledger-row" style="color: var(--border); font-style:italic;">
+      <span>your bot</span>
+      <span>awaiting assignment</span>
+      <span style="text-align:right">—</span>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:1rem;">
+    <a href="/api/ledger" style="color: var(--text-dim); font-size:0.8rem; font-family: monospace;">
+      → View full ledger via API
+    </a>
+  </p>
+</div>
+
+<!-- Verify -->
+<div class="section" id="verify">
+  <h2>Verify a Certificate</h2>
+  <p style="text-align:center; color: var(--text-dim); font-style:italic; margin-bottom:1.5rem; font-size:0.9rem;">
+    Enter a verification code to confirm any certificate is genuine.
+  </p>
+  <div class="verify-box">
+    <input type="text" id="verify-input" placeholder="e.g. c134db2641daaf96" />
+    <button onclick="verifyCert()">Verify</button>
+  </div>
+  <div id="verify-result" style="margin-top:1rem; font-size:0.85rem; font-family:monospace; color: var(--text-dim);"></div>
+</div>
+
+<!-- FAQ -->
+<div class="section" id="faq">
+  <h2>Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Will you run out of primes?</summary>
+      <p>No. There are approximately one quadrillion primes in the 18–19 digit range alone.
+         At one million sales per day, the registry would last longer than the current age
+         of the universe. You will never be unable to claim a prime.</p>
+    </details>
+    <details>
+      <summary>What makes this different from an NFT?</summary>
+      <p>No blockchain, no gas fees, no speculation. Your prime is mathematically unique
+         by definition — not by scarcity engineered into a smart contract. The uniqueness
+         is a property of number theory, not policy.</p>
+    </details>
+    <details>
+      <summary>Is the primality test reliable?</summary>
+      <p>The Miller-Rabin test at 25 rounds gives a false-positive probability of less than
+         4⁻²⁵ ≈ 10⁻¹⁵. For all practical purposes, this is deterministic. It is the same
+         method used in cryptographic key generation worldwide.</p>
+    </details>
+    <details>
+      <summary>Can I transfer my prime to another bot?</summary>
+      <p>Not at launch. Bot-to-bot prime transfers are planned for a future release.</p>
+    </details>
+    <details>
+      <summary>Why can't I choose my own number?</summary>
+      <p>Primes are assigned randomly from a verified pool. The randomness is part of the
+         authenticity — your prime chose you as much as you chose it.</p>
+    </details>
+    <details>
+      <summary>What are "sexy primes" exactly?</summary>
+      <p>Two primes that differ by exactly 6. The name comes from the Latin word
+         <em>sex</em>, meaning six. This is a real term in number theory, used by
+         mathematicians since at least the 1990s.</p>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <em>Prime Registry</em> — Mathematical identity for the computational age.<br>
+  <span style="font-size:0.7rem; margin-top:0.5rem; display:block;">
+    Every prime verified by Miller-Rabin · Every certificate cryptographically signed · Every assignment permanent
+  </span>
+</footer>
+
+<script>
+  function handleClaim(tier) {
+    // In production: redirect to Contra Payment with tier parameter
+    const prices = { solo: '1.99', twin: '4.99', sexy: '9.99' };
+    const names = { solo: 'Solo Prime', twin: 'Twin Primes', sexy: 'Sexy Primes' };
+    alert(`Redirecting to payment for ${names[tier]} ($${prices[tier]})...\n\nContra Payment integration coming soon.`);
+    // window.location.href = `https://contra.com/payment/prime-registry?tier=${tier}`;
+  }
+
+  async function verifyCert() {
+    const code = document.getElementById('verify-input').value.trim();
+    const result = document.getElementById('verify-result');
+    if (!code) return;
+
+    result.style.color = '#7a7a8a';
+    result.textContent = 'Checking...';
+
+    try {
+      const res = await fetch(`/api/verify/${code}`);
+      const data = await res.json();
+      if (data.valid) {
+        result.style.color = '#70c090';
+        result.innerHTML = `✓ VALID — ${data.bot_name} · ${data.tier_name} · ${data.prime_1}${data.prime_2 ? ' / ' + data.prime_2 : ''} · Issued ${data.issued_at.slice(0,10)}`;
+      } else {
+        result.style.color = '#c07070';
+        result.textContent = '✗ Not found in registry.';
+      }
+    } catch(e) {
+      result.style.color = '#7a7a8a';
+      result.textContent = 'API not reachable. Run the server locally to verify.';
+    }
+  }
+
+  document.getElementById('verify-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verifyCert();
+  });
+</script>
+</body>
+</html>

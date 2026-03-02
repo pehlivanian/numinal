@@ -16,6 +16,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent))
 from generator import claim, init_db, DB_PATH
 from certificate import render_certificate
+from contra_webhook import handle_contra_webhook
 
 app = FastAPI(
     title="Prime Registry API",
@@ -191,6 +192,12 @@ def public_ledger(page: int = 1, per_page: int = 50):
             for r in rows
         ]
     }
+
+
+@app.post("/webhook/contra")
+async def contra_webhook(request: Request):
+    """Contra Payment webhook — called after successful purchase."""
+    return await handle_contra_webhook(request)
 
 
 @app.get("/stats")
