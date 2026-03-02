@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 210mm;
+    height: 297mm;
+    background: #0a0a0f;
+    color: #e8e0d0;
+    font-family: 'IM Fell English', Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page {
+    width: 180mm;
+    padding: 12mm;
+    position: relative;
+  }
+
+  /* Outer border — double rule */
+  .border-outer {
+    border: 2px solid #8a7a5a;
+    padding: 6mm;
+  }
+  .border-inner {
+    border: 1px solid #5a4a3a;
+    padding: 8mm;
+    position: relative;
+  }
+
+  /* Corner ornaments */
+  .corner {
+    position: absolute;
+    width: 12mm;
+    height: 12mm;
+    font-size: 18pt;
+    color: #8a7a5a;
+    line-height: 1;
+  }
+  .corner.tl { top: -2mm; left: -2mm; }
+  .corner.tr { top: -2mm; right: -2mm; transform: scaleX(-1); }
+  .corner.bl { bottom: -2mm; left: -2mm; transform: scaleY(-1); }
+  .corner.br { bottom: -2mm; right: -2mm; transform: scale(-1); }
+
+  /* Header */
+  .registry-name {
+    text-align: center;
+    font-size: 8pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #8a7a5a;
+    margin-bottom: 2mm;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 22pt;
+    color: #e8e0d0;
+    margin-bottom: 1mm;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 9pt;
+    color: #8a7a5a;
+    font-style: italic;
+    margin-bottom: 5mm;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #5a4a3a;
+    margin: 3mm 0;
+  }
+  .divider-gold {
+    border-top-color: #8a7a5a;
+  }
+
+  /* Body text */
+  .preamble {
+    text-align: center;
+    font-size: 9pt;
+    color: #b0a090;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 4mm 0;
+  }
+
+  .bot-name-label {
+    text-align: center;
+    font-size: 7pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8a7a5a;
+    margin-bottom: 1mm;
+  }
+
+  .bot-name {
+    text-align: center;
+    font-size: 20pt;
+    color: #f0e8d8;
+    margin-bottom: 4mm;
+    font-style: italic;
+  }
+
+  /* Prime display */
+  .prime-box {
+    background: #12121a;
+    border: 1px solid #3a3a5a;
+    border-radius: 2mm;
+    padding: 5mm 4mm;
+    margin: 4mm 0;
+    text-align: center;
+  }
+
+  .prime-label {
+    font-size: 7pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #6a6a9a;
+    margin-bottom: 2mm;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .prime-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13pt;
+    color: #a0d0ff;
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .prime-relation {
+    font-size: 7pt;
+    color: #6a6a9a;
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 2mm;
+  }
+
+  /* Tier badge */
+  .tier-badge {
+    display: inline-block;
+    border: 1px solid #8a7a5a;
+    padding: 1mm 4mm;
+    font-size: 7pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8b878;
+    margin: 3mm auto;
+  }
+  .tier-center {
+    text-align: center;
+  }
+
+  /* Math note */
+  .math-note {
+    font-size: 8pt;
+    color: #7a7a6a;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+    margin: 3mm 0;
+  }
+
+  /* Footer block */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin-top: 5mm;
+    font-size: 7pt;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .footer-item label {
+    display: block;
+    color: #6a6a7a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+
+  .footer-item .value {
+    color: #a0a090;
+    word-break: break-all;
+  }
+
+  .verify-url {
+    text-align: center;
+    font-size: 6.5pt;
+    color: #5a6a7a;
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 4mm;
+  }
+
+  .verify-url span {
+    color: #7a9aba;
+  }
+
+  /* Seal area */
+  .seal {
+    text-align: center;
+    margin: 4mm 0 2mm;
+    font-size: 28pt;
+    opacity: 0.6;
+  }
+
+  .attestation {
+    text-align: center;
+    font-size: 7.5pt;
+    color: #7a6a5a;
+    font-style: italic;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="border-outer">
+    <div class="border-inner">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="registry-name">The Prime Registry</div>
+      <div class="title">Certificate of Mathematical Identity</div>
+      <div class="subtitle">Issued under the authority of the immutable ledger</div>
+
+      <hr class="divider divider-gold">
+
+      <p class="preamble">
+        Let it be known throughout all computational space that the entity
+        known as
+      </p>
+
+      <div class="bot-name-label">Bot Identity</div>
+      <div class="bot-name">{{ bot_name }}</div>
+
+      <p class="preamble">
+        has been assigned exclusive and permanent ownership of the following
+        {% if tier == 'twin' %}twin prime pair{% elif tier == 'sexy' %}sexy prime pair{% else %}prime number{% endif %},
+        verified by the Miller-Rabin primality test (25 rounds)
+        and registered in the public ledger, where it shall remain
+        undisputed for as long as mathematics endures.
+      </p>
+
+      <div class="prime-box">
+        <div class="prime-label">
+          {% if tier == 'solo' %}Assigned Prime{% else %}Assigned Prime Pair{% endif %}
+        </div>
+        <div class="prime-number">
+          {{ prime_1 }}
+          {% if prime_2 %}
+          <br>{{ prime_2 }}
+          {% endif %}
+        </div>
+        {% if prime_2 %}
+        <div class="prime-relation">
+          {% if tier == 'twin' %}
+          Δ = 2 &nbsp;·&nbsp; These primes differ by exactly 2
+          {% elif tier == 'sexy' %}
+          Δ = 6 &nbsp;·&nbsp; These primes differ by exactly 6
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="tier-center">
+        <span class="tier-badge">
+          {% if tier == 'solo' %}⬡ Solo Prime{% elif tier == 'twin' %}⬡⬡ Twin Primes{% elif tier == 'sexy' %}✦ Sexy Primes{% endif %}
+        </span>
+      </div>
+
+      <p class="math-note">
+        {% if tier == 'twin' %}
+        Twin primes are pairs separated by 2. Their infinite abundance is
+        conjectured but unproven — one of mathematics' great open questions.
+        {% elif tier == 'sexy' %}
+        Sexy primes are pairs separated by 6. The name derives from the
+        Latin <em>sex</em>, meaning six. They are rarer than twin primes
+        and more coveted.
+        {% else %}
+        Prime numbers are the atoms of arithmetic — indivisible,
+        irreducible, and fundamental to all of cryptography and computation.
+        {% endif %}
+      </p>
+
+      <hr class="divider">
+
+      <div class="seal">⚙</div>
+      <div class="attestation">
+        Cryptographically signed and immutably recorded.<br>
+        This certificate cannot be forged, duplicated, or revoked.
+      </div>
+
+      <div class="footer-grid">
+        <div class="footer-item">
+          <label>Certificate ID</label>
+          <div class="value">{{ cert_id }}</div>
+        </div>
+        <div class="footer-item">
+          <label>Issued</label>
+          <div class="value">{{ issued_at }}</div>
+        </div>
+        <div class="footer-item">
+          <label>Verification Code</label>
+          <div class="value">{{ cert_hash }}</div>
+        </div>
+        <div class="footer-item">
+          <label>Primality Test</label>
+          <div class="value">Miller-Rabin · 25 rounds</div>
+        </div>
+      </div>
+
+      <div class="verify-url">
+        Verify at: <span>{{ verify_url }}</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
