@@ -406,7 +406,7 @@
       </div>
       <div class="tier-example">
         <small>Example</small>
-        9,241,817,304,958,631,117
+        621,401,061,286,930,637
       </div>
       <a href="#" class="btn btn-dim" onclick="handleClaim('solo')">Claim Your Prime</a>
     </div>
@@ -576,12 +576,25 @@
 </footer>
 
 <script>
-  function handleClaim(tier) {
-    // In production: redirect to Contra Payment with tier parameter
-    const prices = { solo: '1.99', twin: '4.99', sexy: '9.99' };
-    const names = { solo: 'Solo Prime', twin: 'Twin Primes', sexy: 'Sexy Primes' };
-    alert(`Redirecting to payment for ${names[tier]} ($${prices[tier]})...\n\nContra Payment integration coming soon.`);
-    // window.location.href = `https://contra.com/payment/prime-registry?tier=${tier}`;
+  async function handleClaim(tier) {
+    const botName = prompt(`What's your bot's name?`);
+    if (!botName || !botName.trim()) return;
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, bot_name: botName.trim() })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (e) {
+      alert('Error connecting to payment server. Please try again.');
+    }
   }
 
   async function verifyCert() {

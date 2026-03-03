@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from generator import claim, init_db, DB_PATH
 from certificate import render_certificate
 from contra_webhook import handle_contra_webhook
+from stripe_checkout import router as stripe_router
 
 app = FastAPI(
     title="Prime Registry API",
@@ -30,6 +31,8 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+app.include_router(stripe_router, prefix="")
 
 PRICES = {
     "solo": 1.99,
