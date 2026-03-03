@@ -152,8 +152,8 @@ async def mint_via_helius(metadata_uri, recipient_wallet):
   "name": "Prime Registry — Quincy",
   "symbol": "PRIME",
   "description": "Quincy holds the Twin Primes: 9713092013072591177 / 9713092013072591179...",
-  "image": "https://primeregistry.io/api/certificate/<hash>.png",
-  "external_url": "https://primeregistry.io/verify/<hash>",
+  "image": "https://numinals.io/api/certificate/<hash>.png",
+  "external_url": "https://numinals.io/verify/<hash>",
   "attributes": [
     {"trait_type": "Bot Name",  "value": "Quincy"},
     {"trait_type": "Tier",      "value": "Twin Primes"},

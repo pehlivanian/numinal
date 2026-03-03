@@ -12,7 +12,7 @@ export SMTP_HOST="${SMTP_HOST:-smtp.gmail.com}"
 export SMTP_PORT="${SMTP_PORT:-587}"
 export SMTP_USER="${SMTP_USER:-}"
 export SMTP_PASS="${SMTP_PASS:-}"
-export FROM_EMAIL="${FROM_EMAIL:-registry@primeregistry.io}"
+export FROM_EMAIL="${FROM_EMAIL:-registry@numinals.io}"
 
 mkdir -p ledger
 

@@ -163,7 +163,7 @@ def register(bot_name: str, tier: str, primes: tuple) -> dict:
         "prime_2": prime_2,
         "issued_at": issued_at,
         "cert_hash": cert_hash,
-        "verify_url": f"https://primeregistry.io/verify/{cert_hash}"
+        "verify_url": f"{os.environ.get('REGISTRY_BASE_URL', 'https://numinals.io')}/verify/{cert_hash}"
     }
 
 

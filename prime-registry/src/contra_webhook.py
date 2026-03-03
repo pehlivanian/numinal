@@ -27,7 +27,7 @@ SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
 SMTP_USER = os.environ.get("SMTP_USER", "")
 SMTP_PASS = os.environ.get("SMTP_PASS", "")
-FROM_EMAIL = os.environ.get("FROM_EMAIL", "registry@primeregistry.io")
+FROM_EMAIL = os.environ.get("FROM_EMAIL", "registry@numinals.io")
 
 # Tier mapping from Contra product IDs
 # Set these to match your actual Contra product IDs
@@ -61,7 +61,7 @@ def verify_contra_signature(payload: bytes, signature: str, secret: str) -> bool
 async def handle_contra_webhook(request: Request):
     """
     Main webhook handler. Register as your Contra Payment webhook URL:
-    https://primeregistry.io/api/webhook/contra
+    https://numinals.io/api/webhook/contra
     """
     import sys
     sys.path.insert(0, str(Path(__file__).parent))
@@ -168,7 +168,7 @@ Verification Code: {record['cert_hash']}
 —
 Prime Registry
 Mathematical identity for the computational age.
-https://primeregistry.io
+https://numinals.io
 """
     msg.attach(MIMEText(body, "plain"))
 

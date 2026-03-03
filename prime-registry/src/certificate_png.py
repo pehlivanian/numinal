@@ -194,7 +194,7 @@ def render_png(record: dict) -> bytes:
     field("PRIMALITY", "Miller-Rabin · 25 rounds", col2_x, y_foot + 70)
 
     # Verify URL
-    verify_text = f"primeregistry.io/verify/{cert_hash}"
+    verify_text = f"numinals.io/verify/{cert_hash}"
     centered(verify_text, H - 55, f_tiny, (80, 100, 120))
 
     # Bottom border detail

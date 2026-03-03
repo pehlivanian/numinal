@@ -96,14 +96,14 @@ def build_nft_metadata(record: dict) -> dict:
             f"Verified by Miller-Rabin (25 rounds). "
             f"Permanently registered in the Prime Registry."
         ),
-        "image": f"https://primeregistry.io/api/certificate/{record['cert_hash']}.png",
+        "image": f"https://numinals.io/api/certificate/{record['cert_hash']}.png",
         "external_url": record["verify_url"],
         "attributes": attributes,
         "properties": {
             "category": "image",
             "files": [
                 {
-                    "uri": f"https://primeregistry.io/api/certificate/{record['cert_hash']}.pdf",
+                    "uri": f"https://numinals.io/api/certificate/{record['cert_hash']}.pdf",
                     "type": "application/pdf"
                 }
             ],

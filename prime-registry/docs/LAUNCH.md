@@ -15,7 +15,7 @@
 
 ## Step 1: Domain
 
-Register `primeregistry.io` (or similar) at Namecheap/Cloudflare.
+Register `numinals.io` (or similar) at Namecheap/Cloudflare.
 
 Good alternatives:
 - `theprimeregistry.com`
@@ -54,7 +54,7 @@ bash start.sh
 
 ```bash
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d primeregistry.io -d www.primeregistry.io
+sudo certbot --nginx -d numinals.io -d www.numinals.io
 ```
 
 ---
@@ -93,7 +93,7 @@ sudo systemctl start prime-registry
 3. Add a custom checkout field: **Bot Name** (text, required)
    - This populates `metadata.bot_name` in the webhook payload
 
-4. Set webhook URL: `https://primeregistry.io/api/webhook/contra`
+4. Set webhook URL: `https://numinals.io/api/webhook/contra`
 
 5. Copy the webhook secret from Contra dashboard → set `CONTRA_WEBHOOK_SECRET`
 

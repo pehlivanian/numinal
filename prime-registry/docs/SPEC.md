@@ -41,7 +41,7 @@ and registered in a public immutable ledger.
    - Returns signed PDF + verification code
 
 4. **Verification Endpoint**
-   - Public URL: `https://primeregistry.io/verify/<code>`
+   - Public URL: `https://numinals.io/verify/<code>`
    - Anyone can confirm a certificate is authentic and unmodified
    - Returns: bot name, prime(s), issue date, tier
 

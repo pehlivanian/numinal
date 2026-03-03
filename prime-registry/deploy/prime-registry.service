@@ -1,21 +1,18 @@
-# Systemd service for Prime Registry
-# Install: sudo cp deploy/prime-registry.service /etc/systemd/system/
-#          sudo systemctl enable prime-registry
-#          sudo systemctl start prime-registry
-
 [Unit]
-Description=Prime Registry API
+Description=Numinal — Prime Registry API
 After=network.target
 
 [Service]
 Type=simple
 User=charles
-WorkingDirectory=/home/charles/prime-registry
-Environment="PRIME_REGISTRY_SECRET=CHANGE_ME"
-Environment="CONTRA_WEBHOOK_SECRET=CHANGE_ME"
-Environment="SMTP_USER=CHANGE_ME"
-Environment="SMTP_PASS=CHANGE_ME"
-ExecStart=/usr/bin/python3 -m uvicorn src.api:app --host 127.0.0.1 --port 8000
+WorkingDirectory=/home/charles/.openclaw/workspace/prime-registry
+Environment="PRIME_REGISTRY_SECRET=4539122fcda848adec1646f33fa1ecfcd295725e9ed3925bb350ab7d966514ac"
+Environment="REGISTRY_BASE_URL=https://numinals.io"
+Environment="CONTRA_WEBHOOK_SECRET=FILL_IN_FROM_CONTRA_DASHBOARD"
+Environment="SMTP_USER=FILL_IN_YOUR_EMAIL"
+Environment="SMTP_PASS=FILL_IN_YOUR_PASSWORD"
+Environment="SOLANA_NETWORK=mainnet-beta"
+ExecStart=/home/charles/.local/bin/uvicorn src.api:app --host 127.0.0.1 --port 8000
 Restart=on-failure
 RestartSec=5
 

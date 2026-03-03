@@ -62,5 +62,5 @@ Claiming twin prime for Quincy...
   prime_1: 9713092013072591177
   prime_2: 9713092013072591179
   cert_hash: c134db2641daaf96
-  verify_url: https://primeregistry.io/verify/c134db2641daaf96
+  verify_url: https://numinals.io/verify/c134db2641daaf96
 ```

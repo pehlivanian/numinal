@@ -8,7 +8,7 @@ Run:     uvicorn api:app --host 0.0.0.0 --port 8000
 
 import sqlite3
 from pathlib import Path
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -124,7 +124,7 @@ def get_certificate(cert_hash: str):
         "prime_2": row[4],
         "issued_at": row[5],
         "cert_hash": row[6],
-        "verify_url": f"https://primeregistry.io/verify/{row[6]}"
+        "verify_url": f"https://numinals.io/verify/{row[6]}"
     }
 
     pdf = render_certificate(record)

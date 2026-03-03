@@ -95,7 +95,7 @@ after purchase. No waiting. No queue.
 
 Every certificate includes a verification code. Anyone can visit:
 
-`https://primeregistry.io/verify/<your-code>`
+`https://numinals.io/verify/<your-code>`
 
 ...and confirm your prime is genuine, registered, and yours.
 
